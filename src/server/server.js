@@ -1,25 +1,46 @@
 import express from 'express';
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import App from '../components/App';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import serialize from 'serialize-javascript';
 
-const server = express();
-server.use(express.static('dist'));
+import config from 'server/config';
+import { serverRenderer } from 'renderers/server';
 
-server.get('/', (req, res) => {
-  const initialMarkup = ReactDOMServer.renderToString(<App />);
+const app = express();
+app.enable('trust proxy');
+app.use(morgan('common'));
 
-  res.send(`
-    <html>
-      <head>
-        <title>Sample Task Manager Application</title>
-      </head>
-      <body>
-        <div id="mountNode">${initialMarkup}</div>
-        <script src="/main.js"></script>
-      </body>
-    </html>
-  `)
+app.use(express.static('public'));
+
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.locals.serialize = serialize;
+
+if (config.isDev) {
+  app.locals.gVars = {
+    main: ['main.css', 'main.js'],
+    vendor: 'vendor.js',
+  };
+} else {
+  try {
+    app.locals.gVars = require('../../.reactful.json');
+  } catch (err) {
+    console.error('Reactful did not find Webpack generated assets');
+  }
+}
+
+app.get('/', async (req, res) => {
+  try {
+    const vars = await serverRenderer();
+    res.render('index', vars);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
 });
 
-server.listen(4243, () => console.log('Task Manager Server is running...'));
+app.listen(config.port, config.host, () => {
+  console.info(`Running on ${config.host}:${config.port}...`);
+});
