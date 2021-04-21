@@ -58,7 +58,7 @@ const TaskForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <fieldset className="field-wrap">
+      <div className="field-wrap">
         <label>
           <p>Description:</p>
           <textarea
@@ -68,8 +68,8 @@ const TaskForm = (props) => {
             required
           />
         </label>
-      </fieldset>
-      <fieldset className="field-row">
+      </div>
+      <div className="field-row">
         <label>
           <p>Priority:</p>
           <select
@@ -96,23 +96,23 @@ const TaskForm = (props) => {
             required
           />
         </label>
-      </fieldset>
+      </div>
 
       {taskExists ? (
-        <fieldset className="field-row">
+        <div className="field-row">
           <button className="button" onClick={() => setSubmitType('update')}>
             Update
           </button>
           <button className="button" onClick={() => setSubmitType('delete')}>
             Delete
           </button>
-        </fieldset>
+        </div>
       ) : (
-        <fieldset className="field-row">
+        <div className="field-row">
           <button className="button" onClick={() => setSubmitType('create')}>
             Create
           </button>
-        </fieldset>
+        </div>
       )}
     </form>
   );

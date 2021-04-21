@@ -13,7 +13,6 @@ const TaskManager = () => {
   return (
     <div>
       <h1>My Tasks Manager</h1>
-      <br />
       <CreateTask setRefresh={triggerRefresh} />
       <TaskList refresh={refresh} setRefresh={triggerRefresh} />
     </div>
