@@ -1,8 +1,7 @@
-const env = process.env;
-
-export default {
-  port: env.PORT || 4243,
-  host: env.HOST || 'localhost',
-  isDev: env.NODE_ENV !== 'production',
+module.exports = {
+  port: 4247,
+  host: 'localhost',
+  isDev: true,
   isBrowser: typeof window !== 'undefined',
+  dataServer: 'localhost:4242',
 };
