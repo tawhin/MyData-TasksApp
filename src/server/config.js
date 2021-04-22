@@ -3,5 +3,5 @@ module.exports = {
   host: 'localhost',
   isDev: true,
   isBrowser: typeof window !== 'undefined',
-  dataServer: 'localhost:4242',
+  dataServer: 'localhost:4242/tasks',
 };

@@ -186,7 +186,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("module.exports = {\n  port: 4247,\n  host: 'localhost',\n  isDev: true,\n  isBrowser: typeof window !== 'undefined',\n  dataServer: 'localhost:4242'\n};//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiS09sLy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9zZXJ2ZXIvY29uZmlnLmpzPzI4ZTkiXSwic291cmNlc0NvbnRlbnQiOlsibW9kdWxlLmV4cG9ydHMgPSB7XG4gIHBvcnQ6IDQyNDcsXG4gIGhvc3Q6ICdsb2NhbGhvc3QnLFxuICBpc0RldjogdHJ1ZSxcbiAgaXNCcm93c2VyOiB0eXBlb2Ygd2luZG93ICE9PSAndW5kZWZpbmVkJyxcbiAgZGF0YVNlcnZlcjogJ2xvY2FsaG9zdDo0MjQyJyxcbn07XG4iXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUxBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///KOl/\n");
+eval("module.exports = {\n  port: 4247,\n  host: 'localhost',\n  isDev: true,\n  isBrowser: typeof window !== 'undefined',\n  dataServer: 'localhost:4242/tasks'\n};//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiS09sLy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9zZXJ2ZXIvY29uZmlnLmpzPzI4ZTkiXSwic291cmNlc0NvbnRlbnQiOlsibW9kdWxlLmV4cG9ydHMgPSB7XG4gIHBvcnQ6IDQyNDcsXG4gIGhvc3Q6ICdsb2NhbGhvc3QnLFxuICBpc0RldjogdHJ1ZSxcbiAgaXNCcm93c2VyOiB0eXBlb2Ygd2luZG93ICE9PSAndW5kZWZpbmVkJyxcbiAgZGF0YVNlcnZlcjogJ2xvY2FsaG9zdDo0MjQyL3Rhc2tzJyxcbn07XG4iXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUxBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///KOl/\n");
 
 /***/ }),
 
