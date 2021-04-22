@@ -5,6 +5,11 @@ const axios = require('axios');
 import TaskForm from './TaskForm';
 import config from '../server/config';
 
+/**
+ * React component to render a list of existing task objects within collection of TaskForm components.
+ * @param {*} props - Set of properties provided to the component.
+ * @returns JSX
+ */
 const TaskList = (props) => {
   const [tasks, setTasks] = useState([]);
 
@@ -19,10 +24,19 @@ const TaskList = (props) => {
     }
   };
 
+  /**
+   * Use the react effect to render a list when the component is first mounted and when the task list is dynamically
+   * changed.
+   */
   useEffect(() => {
-    // Load tasks after the first render has been mounted, or if the refresh property changes
     loadTasks();
-  }, [props.refresh, setTasks]); // Pass the setTasks variable here prevents the useEffects from when setTasks is called.
+
+    /* Adding setTasks a dependent ensures that the tasks are loaded when the setter is first returned by useState.
+     * This ensures we have a list of existing tasks when rendering for the first time (as the setter is created only once).
+     * We then monitor the refresh property to use this effect dynamically as tasks are added or removed within the TaskForm
+     * component.
+     */
+  }, [props.refresh, setTasks]);
 
   return (
     <div className="wrapper">

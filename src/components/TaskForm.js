@@ -4,20 +4,35 @@ const axios = require('axios');
 
 import config from '../server/config';
 
+/**
+ * React component to render task objects within a form capable of creating, updating or deleting tasks.
+ * @param {*} props - Set of properties provided to the component.
+ * @returns JSX
+ */
 const TaskForm = (props) => {
   const [desc, setDesc] = useState(props.task.description);
   const [priority, setPriority] = useState(props.task.priority);
   const [date, setDate] = useState(props.task.date);
   const [submitType, setSubmitType] = useState();
+
   const axiosInstance = axios.create({
     baseURL: `http://${config.dataServer}`,
+    // Added to allow code to be executed in web React Sandbox environments, useful when leaning the framework.
+    // Allows the website to interface with our local data service instance.
     headers: { 'Access-Control-Allow-Origin': '*' },
   });
 
+  /**
+   * Function to action the form submit event and perform the required CRUD operation to
+   * the data service backend.
+   * @param {*} event - Form submit event.
+   */
   const handleSubmit = async (event) => {
     try {
+      // Override the default form submit event.
       event.preventDefault();
 
+      // Perform the required AJAX operation depending on the submit action type.
       switch (submitType) {
         case 'create':
           console.log('POSTING new task');
@@ -40,20 +55,31 @@ const TaskForm = (props) => {
           break;
       }
     } catch (err) {
+      // TODO - Provide visual feedback of the network error to the user.
       console.log(err);
     }
   };
 
+  /**
+   * Create a task object from the react state variables.
+   * @returns {Object} task object
+   */
   const getTask = () => {
     return { description: desc, priority: priority, date: date };
   };
 
+  /**
+   * Reset the react state variable to trigger a render.
+   */
   const clearTask = () => {
     setDesc('');
     setPriority('');
     setDate('');
   };
 
+  /**
+   * Determines whether the form contains an existing task or an empty task.
+   */
   const taskExists = props.task.id !== undefined;
 
   return (

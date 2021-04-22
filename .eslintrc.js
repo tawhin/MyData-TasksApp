@@ -26,7 +26,7 @@ module.exports = {
   plugins: ['react', 'react-hooks'],
   rules: {
     'react/prop-types': ['off'],
-    'no-console': ['warn', { allow: ['info', 'error', 'dir'] }],
+    'no-console': ['off', { allow: ['info', 'error', 'dir'] }],
     'no-else-return': 'error',
     'no-unneeded-ternary': 'error',
     'no-useless-return': 'error',
