@@ -18,7 +18,7 @@ const TaskList = (props) => {
     try {
       const resp = await axios.get(`http://${config.dataServer}/dataset`);
       console.log(resp);
-      setTasks(Object.values(resp.data));
+      setTasks(resp.data);
     } catch (err) {
       console.log(err);
     }

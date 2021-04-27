@@ -42,12 +42,12 @@ const TaskForm = (props) => {
           props.refreshTasks();
           break;
         case 'update':
-          console.log(`PUT task id: ${props.task.id}`);
-          await axiosInstance.put(`/data/${props.task.id}`, getTask());
+          console.log(`PUT task id: ${props.task._id}`);
+          await axiosInstance.put(`/data/${props.task._id}`, getTask());
           break;
         case 'delete':
-          console.log(`DELETE task id: ${props.task.id}`);
-          await axiosInstance.delete(`/data/${props.task.id}`);
+          console.log(`DELETE task id: ${props.task._id}`);
+          await axiosInstance.delete(`/data/${props.task._id}`);
           props.refreshTasks();
           break;
         default:
@@ -80,7 +80,7 @@ const TaskForm = (props) => {
   /**
    * Determines whether the form contains an existing task or an empty task.
    */
-  const taskExists = props.task.id !== undefined;
+  const taskExists = props.task._id !== undefined;
 
   return (
     <form onSubmit={handleSubmit}>
