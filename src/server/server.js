@@ -1,32 +1,28 @@
 import express from 'express';
-import config from 'server/config';
-import serverRenderer from 'renderers/server';
-import bodyParser from 'body-parser';
-import morgan from 'morgan';
-import serialize from 'serialize-javascript';
+import config from './config';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import App from '../components/App';
 
-const app = express();
-app.enable('trust proxy');
-app.use(morgan('common'));
+const server = express();
+server.use(express.static('dist'));
 
-app.use(express.static('public'));
+server.get('/', (req, res) => {
+  const initialMarkup = ReactDOMServer.renderToString(<App />);
 
-app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.locals.serialize = serialize;
-
-app.get('/', async (req, res) => {
-  try {
-    const vars = await serverRenderer();
-    res.render('index', vars);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
-  }
+  res.send(`
+    <html>
+      <head>
+        <title>Sample React App</title>
+      </head>
+      <body>
+        <div id="mountNode">${initialMarkup}</div>
+        <script src="/main.js"></script>
+      </body>
+    </html>
+  `);
 });
 
-app.listen(config.port, config.host, () => {
+server.listen(config.port, config.host, () => {
   console.info(`Running on ${config.host}:${config.port}...`);
 });
