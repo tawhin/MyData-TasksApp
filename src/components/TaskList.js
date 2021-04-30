@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 const axios = require('axios');
 
 import TaskForm from './TaskForm';
-import config from '../server/config';
 
 /**
  * React component to render a list of existing task objects within collection of TaskForm components.
@@ -16,7 +15,9 @@ const TaskList = (props) => {
   const loadTasks = async () => {
     console.log('loading tasks');
     try {
-      const resp = await axios.get(`http://${config.dataServer}/dataset`);
+      const resp = await axios.get(
+        `${process.env.DATA_SERVER_HOST}/tasks/dataset`
+      );
       console.log(resp);
       setTasks(resp.data);
     } catch (err) {
@@ -43,7 +44,7 @@ const TaskList = (props) => {
       <h2>Existing Tasks</h2>
       {tasks.map((existingTask) => (
         <TaskForm
-          key={existingTask.id}
+          key={existingTask._id}
           task={{ ...existingTask }}
           refreshTasks={props.setRefresh}
         />

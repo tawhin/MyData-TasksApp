@@ -1,11 +1,10 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
-const isDev = process.env.NODE_ENV !== 'production';
-
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
+  entry: './src/index.js',
+
   module: {
     rules: [
       {
@@ -22,6 +21,14 @@ const config = {
       },
     ],
   },
+  plugins: [
+    // add the plugin to your plugins array
+    new webpack.DefinePlugin({
+      'process.env.DATA_SERVER_HOST': JSON.stringify(
+        process.env.DATA_SERVER_HOST || 'http://localhost:4242'
+      ),
+    }),
+  ],
 };
 
 module.exports = config;

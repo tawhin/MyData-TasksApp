@@ -6,7 +6,9 @@
     "start": "concurrently \"npm run dev-server\" \"npm run dev-bundle\"",
     "test": "jest",
     "dev-server": "cross-env NODE_PATH=./src nodemon --exec \"babel-node ./src/server/server.js\" --ignore public/",
-    "dev-bundle": "webpack -wd"
+    "dev-bundle": "webpack -wd",
+    "dev:server": "NODE_ENV=development webpack --config webpack.server.js --mode=development -w",
+    "dev:client": "NODE_ENV=development webpack --config webpack.client.js --mode=development -w",
   },
   "jest": {
     "modulePaths": [

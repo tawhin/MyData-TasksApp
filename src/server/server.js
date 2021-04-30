@@ -9,11 +9,11 @@ server.use(express.static('dist'));
 
 server.get('/', (req, res) => {
   const initialMarkup = ReactDOMServer.renderToString(<App />);
-
+  console.log();
   res.send(`
     <html>
       <head>
-        <title>Sample React App</title>
+        <title>My-Tasks</title>
       </head>
       <body>
         <div id="mountNode">${initialMarkup}</div>
@@ -23,6 +23,6 @@ server.get('/', (req, res) => {
   `);
 });
 
-server.listen(config.port, config.host, () => {
-  console.info(`Running on ${config.host}:${config.port}...`);
+server.listen(config.port, () => {
+  console.info(`Running on ${config.port}...`);
 });

@@ -5,11 +5,15 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "start:dev": "concurrently \"npm run dev:server\" \"npm run dev:bundler\"",
-    "dev:server": "nodemon --exec babel-node src/server/server.js --ignore dist/",
-    "dev:bundler": "webpack -w --mode=development",
-    "prod:server": "node --exec babel-node src/server/server.js",
-    "prod:bundler": "webpack -w --mode=production"
+    "start": "npm run clean && npm run dev:start",
+    "dev:start": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "cross-env NODE_PATH=./src nodemon --exec \"babel-node ./src/server/server.js\" --ignore dist/",
+    "dev:client": "webpack --config webpack.client.js --mode=development -w",
+    "prod:server": "NODE_ENV=production webpack --config webpack.server.js --mode=production",
+    "prod:client": "NODE_ENV=production webpack --config webpack.client.js --mode=production",
+    "prod:build": "npm run clean && npm run prod:server && npm run prod:client",
+    "clean": "rm -rf ./dist && mkdir dist",
+    "prod:start": "node ./dist/server.js"
   },
   "author": "Trevor Whinmill",
   "license": "ISC",
@@ -22,6 +26,7 @@
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "concurrently": "^6.0.2",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.2.4",
     "express": "^4.17.1",
     "mini-css-extract-plugin": "^1.5.1",
@@ -30,9 +35,11 @@
     "style-loader": "^2.0.0",
     "webpack": "^5.36.1",
     "webpack-chunk-hash": "^0.6.0",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^4.6.0",
+    "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.16",
     "@babel/node": "^7.13.13",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",

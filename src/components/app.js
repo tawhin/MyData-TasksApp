@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import CreateTask from './CreateTask';
 import TaskList from './TaskList';
 
-const TaskManager = () => {
+const App = () => {
   const [refresh, setRefresh] = useState(false);
 
   const triggerRefresh = () => {
@@ -19,4 +19,4 @@ const TaskManager = () => {
   );
 };
 
-export default TaskManager;
+export default App;

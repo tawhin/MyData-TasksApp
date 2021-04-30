@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 const axios = require('axios');
 
-import config from '../server/config';
-
 /**
  * React component to render task objects within a form capable of creating, updating or deleting tasks.
  * @param {*} props - Set of properties provided to the component.
@@ -16,7 +14,7 @@ const TaskForm = (props) => {
   const [submitType, setSubmitType] = useState();
 
   const axiosInstance = axios.create({
-    baseURL: `http://${config.dataServer}`,
+    baseURL: process.env.DATA_SERVER_HOST,
     // Added to allow code to be executed in web React Sandbox environments, useful when leaning the framework.
     // Allows the website to interface with our local data service instance.
     headers: { 'Access-Control-Allow-Origin': '*' },

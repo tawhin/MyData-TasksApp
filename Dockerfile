@@ -1,4 +1,4 @@
-FROM node:16-alpine3.11
+FROM node:16
 LABEL MAINTAINER=trevwhin@gmail.com
 
 #Copy the source code in to the /src container
@@ -14,4 +14,6 @@ RUN npm install
 
 COPY . ./
 
-CMD ["npm", "start"]
+RUN npm run prod:build
+
+CMD ["npm", "run", "prod:start"]
