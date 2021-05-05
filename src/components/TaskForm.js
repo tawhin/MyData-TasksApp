@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 const axios = require('axios');
 
 /**
@@ -14,7 +13,7 @@ const TaskForm = (props) => {
   const [submitType, setSubmitType] = useState();
 
   const axiosInstance = axios.create({
-    baseURL: process.env.DATA_SERVER_HOST,
+    baseURL: `${process.env.DATA_SERVER_HOST}/${process.env.DB_NAME}`,
     // Added to allow code to be executed in web React Sandbox environments, useful when leaning the framework.
     // Allows the website to interface with our local data service instance.
     headers: { 'Access-Control-Allow-Origin': '*' },

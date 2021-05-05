@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
+const serverConfig = require('./src/server/config');
 
 const config = {
   entry: './src/index.js',
@@ -24,9 +25,8 @@ const config = {
   plugins: [
     // add the plugin to your plugins array
     new webpack.DefinePlugin({
-      'process.env.DATA_SERVER_HOST': JSON.stringify(
-        process.env.DATA_SERVER_HOST || 'http://localhost:4242'
-      ),
+      'process.env.DATA_SERVER_HOST': JSON.stringify(serverConfig.dataServer),
+      'process.env.DB_NAME': JSON.stringify(serverConfig.dbName),
     }),
   ],
 };
