@@ -9,7 +9,7 @@ server.use(express.static('dist'));
 
 server.get('/', (req, res) => {
   const initialMarkup = ReactDOMServer.renderToString(<App />);
-  console.log();
+  
   res.send(`
     <html>
       <head>
